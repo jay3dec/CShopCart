@@ -29,7 +29,7 @@ angular.module('cart', ['ngRoute'])
         },
 		template: function(elem,attrs){
 			return '<div class="panel-heading">\
-                    <h3 nclass="panel-title">Panel title</h3>\
+                    <h3 class="panel-title">Panel title</h3>\
                 </div>\
                 <div class="panel-body">\
                 	 <div class="radio">\
