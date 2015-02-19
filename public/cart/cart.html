@@ -1,21 +1,25 @@
+ 
  <div class="container">
  <div class="row">
         <div class="col-xs-7 col-md-8 col-sm-8 col-lg-8" >
 
             <div class="panel panel-primary" ng-repeat="q in questions">
-              <check-list name="q.id" option="q.prices"></check-list>
+              <div class="panel-heading">
+                    <h3 class="panel-title">{{q.question}}</h3>
+                </div>
+              <check-list name="q.id" sum="sum(item)" option="q.prices"></check-list>
             </div>
 
           
         </div>
 
-        <div class="col-xs-5 col-md-4 col-sm-4 col-lg-4" data-spy="affix" data-offset-top="20" data-offset-bottom="0">
+        <div ng-class="{'affix': scroll > 50, 'affix-top': scroll <= 50}" class="col-xs-5 col-md-4 col-sm-4 col-lg-4" data-spy="affix" data-offset-top="20" data-offset-bottom="0">
             <div class="panel panel-primary">
-              <div id="divTotal" class="panel-heading">
+              <div class="panel-heading">
                   <h3 class="panel-title">Total</h3>
               </div>
               <div class="panel-body">
-                  <h2>Rs. 100</h2>
+                  <h2>Rs. {{total}}</h2>
               </div>
           </div>
           <div class="text-center">
@@ -25,3 +29,4 @@
         </div>
       </div><!-- /.row  -->
 </div>
+<span class='scroll-debug' scroll-position="scroll">{{scroll}}</span>

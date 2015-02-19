@@ -18,6 +18,17 @@ angular.module('cart', ['ngRoute'])
 		{'question':'RAM','id':'RM','prices':[{'size':'4GB','price':'4000'},{'size':'8GB','price':'8000'}]},
 		{'question':'USB Keyboard','id':'KEY','prices':[{'size':'Standard','price':'2500'},{'size':'Advanced','price':'4500'}]}
 	];
+
+    $scope.scroll = 0;
+
+    $scope.total = 0;
+
+    $scope.sum = function(item){
+                console.log(item);
+                $scope.total += parseInt(item);
+                
+            }
+    
 }])
 
 .directive('checkList',function(){
@@ -25,26 +36,35 @@ angular.module('cart', ['ngRoute'])
 		restrict:'E',
 		scope: {
             name: '=',
-            option: '='
+            option: '=',
+            sum: '&'
         },
 		template: function(elem,attrs){
-			return '<div class="panel-heading">\
-                    <h3 class="panel-title">Panel title</h3>\
-                </div>\
-                <div class="panel-body">\
-                	 <div class="radio">\
-                        <label><input type="radio" name="optradio">Option 1</label>\
-                    </div>\
-                     <div class="radio">\
-                        <label><input type="radio" name="optradio">Option 1</label>\
-                    </div>\
-                    <div class="radio">\
-                        <label><input type="radio" name="optradio">Option 1</label>\
+			return '<div class="panel-body">\
+                    <div class="radio" ng-repeat="i in option">\
+                        <label><input type="radio" ng-model="value" ng-change="sum({item:value})" value="{{i.price}}" name="{{name}}">{{i.size}} Rs.{{i.price}}</label>\
                     </div>\
                 </div>'
 		},
-		link:function(scope,elem,attrs){
-			  
+		link:function(scope,elem,attrs,controller){
+			
 		}
 	};
 })
+
+.directive('scrollPosition', function($window) {
+  return {
+    scope: {
+      scroll: '=scrollPosition'
+    },
+    link: function(scope, element, attrs) {
+      var windowEl = angular.element($window);
+      var handler = function() {
+        scope.scroll = windowEl.scrollTop();
+
+      }
+      windowEl.on('scroll', scope.$apply.bind(scope, handler));
+      handler();
+    }
+  };
+});
