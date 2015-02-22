@@ -1,0 +1,25 @@
+{
+  "name": "CShopCart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "angular-route": "^1.3.13",
+    "express": "^4.11.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jay3dec/CShopCart.git"
+  },
+  "author": "jay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jay3dec/CShopCart/issues"
+  },
+  "homepage": "https://github.com/jay3dec/CShopCart"
+}
