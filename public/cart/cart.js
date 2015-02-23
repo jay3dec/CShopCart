@@ -9,7 +9,8 @@ angular.module('cart', ['ngRoute'])
   });
 }])
 
-.controller('CartCtrl', ['$scope',function($scope) {
+.controller('CartCtrl', ['$scope','CommonProp',function($scope,CommonProp) {
+
 	$scope.questions = [
 		{'question':'Hard Disk','id':'HD','selected':0,'prices':[{'size':'200GB','price':'2000'},{'size':'400GB','price':'4000'}]},
 		{'question':'CPU','id':'CPU','selected':0,'prices':[{'size':'i3','price':'20000'},{'size':'i5','price':'25000'}]},
@@ -19,24 +20,26 @@ angular.module('cart', ['ngRoute'])
 		{'question':'USB Keyboard','id':'KEY','selected':0,'prices':[{'size':'Standard','price':'2500'},{'size':'Advanced','price':'4500'}]}
 	];
 
+    if(CommonProp.getQues()!=''){
+      $scope.questions = CommonProp.getQues();
+    }
+
     $scope.scroll = 0;
 
     $scope.total = function(){
       var t = 0;
-      console.log($scope.questions);
 
       for(var k in $scope.questions){
         t += parseInt($scope.questions[k].selected);
       }
-
+      CommonProp.setTotal(t);
       return t;
 
     }
 
-    $scope.sum = function(item){
-              
-                
-            }
+    $scope.$watch('questions',function(){
+      CommonProp.setQues($scope.questions);
+    })
     
 }])
 
@@ -76,4 +79,24 @@ angular.module('cart', ['ngRoute'])
       handler();
     }
   };
+})
+
+.service('CommonProp', function() {
+    var Ques = '';
+    var Total = 0;
+ 
+    return {
+        getQues: function() {
+            return Ques;
+        },
+        setQues: function(value) {
+            Ques = value;
+        },
+        getTotal: function(){
+            return Total;
+        },
+        setTotal: function(value){
+            Total = value;
+        }
+    };
 });

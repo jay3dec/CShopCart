@@ -9,6 +9,7 @@ angular.module('checkout', ['ngRoute'])
   });
 }])
 
-.controller('CheckoutCtrl', [function() {
-
+.controller('CheckoutCtrl', ['$scope','CommonProp',function($scope,CommonProp) {
+	$scope.qq = CommonProp.getQues();	
+	$scope.total = CommonProp.getTotal();
 }]);
